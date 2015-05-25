@@ -16,7 +16,7 @@ BinarySearchTree<T>::BinarySearchTree(){
 
 template <class T>
 bool BinarySearchTree<T>::add(T data){
-    BinaryTreeNode<T> *node = new BinaryTreeNode<T>();
+    BinaryTreeNode<T> *node = new BinaryTreeNode<T>(data);
     if(!root){
         root = node;
     }
@@ -58,7 +58,7 @@ bool BinarySearchTree<T>::addRecursive(T data, BinaryTreeNode<T> *node){
     }
 
     else{
-        std::cout << "At the end, not found" << std::endl;
+        std::cout << "At the end, weird error" << std::endl;
         return node;
     }
 }
@@ -131,7 +131,10 @@ bool BinarySearchTree<T>::isBST( int minData, int maxData){
 template <class T>
 bool BinarySearchTree<T>::isBST(BinaryTreeNode<T> *node, int minData, int maxData){
     if(node == nullptr) return true;
-    if(node->getData() < minData || node->getData() > maxData) return false;
+    if(node->getData() < minData || node->getData() > maxData) {
+        std::cout << "Failed! " << node->getData() << std::endl;
+        return false;
+    }
     return isBST(node->getLeft(), minData, maxData) && isBST(node->getRight(), minData, maxData);
 }
 
